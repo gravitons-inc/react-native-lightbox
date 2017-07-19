@@ -34,6 +34,7 @@ var Lightbox = React.createClass({
       friction:      PropTypes.number,
     }),
     swipeToDismiss:  PropTypes.bool,
+    onLongPress:     PropTypes.func,
   },
 
   getDefaultProps: function() {
@@ -144,6 +145,7 @@ var Lightbox = React.createClass({
           <TouchableHighlight
             underlayColor={this.props.underlayColor}
             onPress={this.open}
+            onLongPress={this.props.onLongPress}
           >
             {this.props.children}
           </TouchableHighlight>
