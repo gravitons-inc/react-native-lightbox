@@ -211,8 +211,8 @@ export default class LightboxOverlay extends Component {
       height: openVal.interpolate({inputRange: [0, 1], outputRange: [origin.height, WINDOW_HEIGHT]}),
     }];
 
-    const background = (<Animated.View style={[styles.background, { backgroundColor: backgroundColor }, lightboxOpacityStyle]}></Animated.View>);
-    const header = (<Animated.View style={[styles.header, lightboxOpacityStyle]}>{(renderHeader ?
+    const background = (<Animated.View useNativeDriver style={[styles.background, { backgroundColor: backgroundColor }, lightboxOpacityStyle]}></Animated.View>);
+    const header = (<Animated.View useNativeDriver style={[styles.header, lightboxOpacityStyle]}>{(renderHeader ?
       renderHeader(this.close) :
       (
         <TouchableOpacity onPress={this.close}>
@@ -221,7 +221,7 @@ export default class LightboxOverlay extends Component {
       )
     )}</Animated.View>);
     const content = (
-      <Animated.View style={[openStyle, dragStyle]} {...handlers}>
+      <Animated.View useNativeDriver style={[openStyle, dragStyle]} {...handlers}>
         {this.props.children}
       </Animated.View>
     );
