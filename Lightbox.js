@@ -11,7 +11,9 @@ export default class Lightbox extends Component {
     renderContent:   PropTypes.func,
     underlayColor:   PropTypes.string,
     backgroundColor: PropTypes.string,
+    didOpen:         PropTypes.func,
     onOpen:          PropTypes.func,
+    willClose:       PropTypes.func,
     onClose:         PropTypes.func,
     springConfig:    PropTypes.shape({
       tension:       PropTypes.number,
@@ -24,6 +26,8 @@ export default class Lightbox extends Component {
   static defaultProps = {
     swipeToDismiss: true,
     onOpen: () => {},
+    didOpen: () => {},
+    willClose: () => {},
     onClose: () => {},
   };
 
@@ -58,6 +62,8 @@ export default class Lightbox extends Component {
     springConfig: this.props.springConfig,
     backgroundColor: this.props.backgroundColor,
     children: this.getContent(),
+    didOpen: this.props.didOpen,
+    willClose: this.props.willClose,
     onClose: this.onClose,
   })
 
@@ -75,6 +81,7 @@ export default class Lightbox extends Component {
           y: py,
         },
       }, () => {
+        this.props.didOpen();
         if(this.props.navigator) {
           const route = {
             component: LightboxOverlay,
